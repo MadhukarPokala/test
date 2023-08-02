@@ -2,7 +2,7 @@ openapi: 3.0.1
 x-stoplight:
   id: irz92zmivj5zq
 servers:
-  - url: /account
+  - url: /account/zya
     description: Account Server URL's
 paths:
   '/v1/end-customer-profile/{end-customer-profile-id}':
