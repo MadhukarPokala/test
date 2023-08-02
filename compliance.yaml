@@ -1,0 +1,338 @@
+openapi: 3.0.1
+servers:
+- url: /compliance
+  description: Default Server URL
+paths:
+  /webhook/tru-narrative/{hook-name}:
+    post:
+      tags:
+      - webhook-controller
+      operationId: processTruNarrativeWebHook
+      parameters:
+      - name: hook-name
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TruNarrativeWebhookDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+  /v1/check/process-compliance:
+    post:
+      tags:
+      - compliance-controller
+      operationId: processCompliance
+      parameters:
+      - name: x-customer-profile-id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: x-idempotency-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcessComplianceRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /v1/providers:
+    get:
+      tags:
+      - provider-controller
+      operationId: listComplianceProviders
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /v1/providers/{provider-id}:
+    get:
+      tags:
+      - provider-controller
+      operationId: getComplianceProviderById
+      parameters:
+      - name: provider-id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /v1/providers/region/{region}:
+    get:
+      tags:
+      - provider-controller
+      operationId: getComplianceProviderByRegion
+      parameters:
+      - name: region
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - REGION_UNKNOWN
+          - SG
+          - UNRECOGNIZED
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /v1/end-customer-profile/{end-customer-profile-id}:
+    get:
+      tags:
+      - end-customer-profile-controller
+      operationId: getComplianceData
+      parameters:
+      - name: end-customer-profile-id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-customer-profile-id
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /v1/customer-profile:
+    get:
+      tags:
+      - customer-profile-controller
+      operationId: getCustomerProfile
+      parameters:
+      - name: x-customer-profile-id
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /v1/customer-profile/provider/{provider-id}:
+    get:
+      tags:
+      - customer-profile-controller
+      operationId: getOnboardStatus
+      parameters:
+      - name: provider-id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-customer-profile-id
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /v1/check/{compliance-id}:
+    get:
+      tags:
+      - compliance-controller
+      operationId: getUserStatus
+      parameters:
+      - name: compliance-id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-customer-profile-id
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    Decision:
+      type: object
+      properties:
+        code:
+          type: string
+        label:
+          type: string
+    Status:
+      type: object
+      properties:
+        code:
+          type: string
+        label:
+          type: string
+    TruNarrativeWebhookDTO:
+      type: object
+      properties:
+        accountId:
+          type: string
+        accountReference:
+          type: string
+        name:
+          type: string
+        date:
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+        decision:
+          $ref: '#/components/schemas/Decision'
+        transientState:
+          type: boolean
+    Address:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        addressLine3:
+          type: string
+        addressLine4:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        countryCode:
+          type: string
+        localCode:
+          type: string
+    ComplianceData:
+      type: object
+      properties:
+        inputFields:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/InputField'
+          deprecated: true
+    Document:
+      type: object
+      properties:
+        type:
+          type: string
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Page'
+    InputField:
+      type: object
+      properties:
+        urlValue:
+          type: string
+        stringValue:
+          type: string
+        documentValue:
+          $ref: '#/components/schemas/Document'
+        pageValue:
+          $ref: '#/components/schemas/Page'
+        addressValue:
+          $ref: '#/components/schemas/Address'
+        longValue:
+          type: integer
+          format: int64
+        doubleValue:
+          type: number
+          format: double
+    Page:
+      type: object
+      properties:
+        tag:
+          type: string
+        bs64:
+          type: string
+    ProcessComplianceRequestDTO:
+      type: object
+      properties:
+        endCustomerProfileId:
+          type: string
+        providerId:
+          type: string
+        complianceType:
+          type: string
+        data:
+          $ref: '#/components/schemas/ComplianceData'
+    Any:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          $ref: '#/components/schemas/ByteString'
+    ApiResponse:
+      type: object
+      properties:
+        headers:
+          $ref: '#/components/schemas/ApiResponseHeader'
+        data:
+          $ref: '#/components/schemas/Any'
+        pageToken:
+          type: string
+        hasMorePages:
+          type: boolean
+        reversePageToken:
+          type: string
+        hasMoreReversePages:
+          type: boolean
+    ApiResponseHeader:
+      type: object
+      properties:
+        statusCode:
+          type: string
+        message:
+          type: string
+        traceId:
+          type: string
+    ByteString:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        validUtf8:
+          type: boolean
