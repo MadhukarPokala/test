@@ -464,3 +464,7 @@ components:
           deprecated: true
       x-stoplight:
         id: lb2i61xry1pux
+info:
+  title: Ledger
+  version: '1'
+  description: All ledger API's
