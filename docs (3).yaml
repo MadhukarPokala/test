@@ -1,9 +1,11 @@
 openapi: 3.0.1
 x-stoplight:
+
   id: ect1q2xco344w
 servers:
+
   - url: /ledger
-    description: Default Server URL
+    description: Default Server urls
 paths:
   /v1/transaction/update-transaction-status:
     put:
