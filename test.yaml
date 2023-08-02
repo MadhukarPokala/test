@@ -1,0 +1,735 @@
+openapi: 3.0.1
+x-stoplight:
+  id: irz92zmivj5zq
+servers:
+  - url: /account/madhukar
+    description: Account Server URL's
+paths:
+  '/v1/end-customer-profile/{end-customer-profile-id}':
+    get:
+      tags:
+        - end-customer-profile-controller
+      operationId: getEndCustomerProfile
+      parameters:
+        - name: end-customer-profile-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: x-customer-profile-id
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: woszy87j1d6vb
+    put:
+      tags:
+        - end-customer-profile-controller
+      operationId: updateEndCustomerProfile
+      parameters:
+        - name: end-customer-profile-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: x-customer-profile-id
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUpdateEndCustomerProfileDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: y43mzl4mqd5a7
+    delete:
+      tags:
+        - end-customer-profile-controller
+      operationId: deleteEndCustomerProfile
+      parameters:
+        - name: end-customer-profile-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: x-customer-profile-id
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: m2ah15bdr9egd
+  /v1/customer-profile/callback:
+    get:
+      tags:
+        - customer-profile-controller
+      operationId: getCallback
+      parameters:
+        - name: x-customer-profile-id
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: zik09xh03zs14
+    put:
+      tags:
+        - customer-profile-controller
+      operationId: updateCallback
+      parameters:
+        - name: x-customer-profile-id
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUpdateCallbackRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: 2dwshfy6otp4z
+    post:
+      tags:
+        - customer-profile-controller
+      operationId: createCallback
+      parameters:
+        - name: x-customer-profile-id
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUpdateCallbackRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: bzuq2f09zngjy
+    delete:
+      tags:
+        - customer-profile-controller
+      operationId: deleteCallback
+      parameters:
+        - name: x-customer-profile-id
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: oaa4vr5r59t94
+  /v1/notification:
+    post:
+      tags:
+        - notification-controller
+      operationId: pushNotification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationMessageDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: t067jkgat41ey
+  '/v1/notification/replay/{notification-id}':
+    post:
+      tags:
+        - notification-controller
+      operationId: replayNotification
+      parameters:
+        - name: notification-id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: 5vfgcyxghdm9p
+  /v1/end-customer-profile:
+    get:
+      tags:
+        - end-customer-profile-controller
+      operationId: listEndCustomerProfiles
+      parameters:
+        - name: x-customer-profile-id
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: phone-number
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: 5pd588nbcnhle
+    post:
+      tags:
+        - end-customer-profile-controller
+      operationId: createEndCustomerProfile
+      parameters:
+        - name: x-customer-profile-id
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUpdateEndCustomerProfileDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: vil93eepltaj5
+  /v1/customer-profile/minimum-float-balance:
+    get:
+      tags:
+        - customer-profile-controller
+      operationId: getCustomerMinimumFloatBalance
+      parameters:
+        - name: x-customer-profile-id
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: service-name
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: dfdh9jpor3j4w
+    post:
+      tags:
+        - customer-profile-controller
+      operationId: createCustomerMinimumFloatBalance
+      parameters:
+        - name: x-customer-profile-id
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUpdateCustomerFloatingMinimumBalanceDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: 7h8ca1dfb96wf
+  '/v1/notification/{notification-id}':
+    get:
+      tags:
+        - notification-controller
+      operationId: getNotification
+      parameters:
+        - name: x-customer-profile-id
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: notification-id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: z8ou3gwts262z
+  '/v1/customer/{customer-id}':
+    get:
+      tags:
+        - customer-controller
+      operationId: getCustomer
+      parameters:
+        - name: customer-id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: 2bqi57f3ao9j8
+  /v1/customer-profile:
+    get:
+      tags:
+        - customer-profile-controller
+      operationId: getCustomerProfile
+      parameters:
+        - name: x-customer-profile-id
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: 4szg2zbr6qcil
+  /v1/customer-profile/notifications:
+    get:
+      tags:
+        - customer-profile-controller
+      operationId: getNotifications
+      parameters:
+        - name: x-customer-profile-id
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: page-token
+          in: query
+          required: false
+          schema:
+            type: string
+            default: ''
+        - name: reverse-page-token
+          in: query
+          required: false
+          schema:
+            type: string
+            default: ''
+        - name: from-timestamp
+          in: query
+          required: false
+          schema:
+            type: string
+            default: ''
+        - name: to-timestamp
+          in: query
+          required: false
+          schema:
+            type: string
+            default: ''
+        - name: order
+          in: query
+          required: false
+          schema:
+            type: string
+            default: DESC
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      x-stoplight:
+        id: no1mw8m8a0y4b
+components:
+  schemas:
+    CreateUpdateEndCustomerProfileDTO:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+      x-stoplight:
+        id: 0ekjq4k5s4ckl
+    Any:
+      type: object
+      properties:
+        typeUrl:
+          type: string
+        value:
+          $ref: '#/components/schemas/ByteString'
+      x-stoplight:
+        id: 6j1wn3bt8445m
+    ApiResponse:
+      type: object
+      properties:
+        headers:
+          $ref: '#/components/schemas/ApiResponseHeader'
+        data:
+          $ref: '#/components/schemas/Any'
+        pageToken:
+          type: string
+        hasMorePages:
+          type: boolean
+        reversePageToken:
+          type: string
+        hasMoreReversePages:
+          type: boolean
+      x-stoplight:
+        id: 62ex5iz8724fh
+    ApiResponseHeader:
+      type: object
+      properties:
+        statusCode:
+          type: string
+        message:
+          type: string
+        traceId:
+          type: string
+      x-stoplight:
+        id: zw00bc8x59coe
+    ByteString:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        validUtf8:
+          type: boolean
+      x-stoplight:
+        id: slh3cd8qkimug
+    CreateUpdateCallbackRequestDTO:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        type:
+          type: string
+        authToken:
+          type: string
+      x-stoplight:
+        id: 9ddtwylsgtsc1
+    BankingNotificationDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        providerId:
+          type: string
+      x-stoplight:
+        id: x3x6o88ij7tao
+    CardEventNotificationDTO:
+      type: object
+      properties:
+        serviceTransactionId:
+          type: string
+        providerTransactionId:
+          type: string
+        status:
+          type: string
+        message:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          deprecated: true
+      x-stoplight:
+        id: kjpuqru2zet6x
+    CardOTPNotificationDTO:
+      type: object
+      properties:
+        cardId:
+          type: string
+        cardNumberEnding:
+          type: string
+        timestampTs:
+          $ref: '#/components/schemas/Timestamp'
+        merchantName:
+          type: string
+        amount:
+          type: string
+        currency:
+          type: string
+        otp:
+          type: string
+      x-stoplight:
+        id: swwa00bwgzav2
+    ComplianceNotificationDTO:
+      type: object
+      properties:
+        complianceId:
+          type: string
+        status:
+          type: string
+        decision:
+          type: string
+        profileId:
+          type: string
+        profileType:
+          type: string
+      x-stoplight:
+        id: r75bnc3ruq9f2
+    InvestmentNotificationDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+      x-stoplight:
+        id: 2lmg2ega52d1x
+    NotificationDataDTO:
+      type: object
+      properties:
+        testNotification:
+          $ref: '#/components/schemas/TestNotificationDTO'
+        bankingNotification:
+          $ref: '#/components/schemas/BankingNotificationDTO'
+        cardEventNotification:
+          $ref: '#/components/schemas/CardEventNotificationDTO'
+        cardOtpNotification:
+          $ref: '#/components/schemas/CardOTPNotificationDTO'
+        complianceNotification:
+          $ref: '#/components/schemas/ComplianceNotificationDTO'
+        investmentNotification:
+          $ref: '#/components/schemas/InvestmentNotificationDTO'
+      x-stoplight:
+        id: zjkw0cu93w7kv
+    NotificationMessageDTO:
+      type: object
+      properties:
+        notificationId:
+          type: string
+        type:
+          type: string
+          enum:
+            - UNKNOWN_NOTIFICATION_TYPE
+            - BANKING_END_CUSTOMER_ONBOARD
+            - BANKING_ACCOUNT
+            - BANKING_BENEFICIARY
+            - BANKING_TRANSACTION_DEPOSIT
+            - BANKING_TRANSACTION_REFUND
+            - BANKING_TRANSACTION_PAYEE
+            - BANKING_TRANSACTION_CARD
+            - BANKING_TRANSACTION_CARD_DEPOSIT
+            - COMPLIANCE_STATUS_CHANGE
+            - INVESTMENT_END_CUSTOMER_ONBOARDING
+            - INVESTMENT_PORTFOLIO_CHANGE
+            - INVESTMENT_TRANSACTION_CHANGE
+            - INVESTMENT_AMOUNT_TRANSFER
+            - INVESTMENT_ACCOUNT_DEPOSIT
+            - CARD_LIFE_STATUS
+            - CARD_TRANSACTION
+            - CARD_REFUND
+            - CARD_SETTLEMENT
+            - CARD_ALERT
+            - CARD_OTP
+            - UNRECOGNIZED
+        profileId:
+          type: string
+        profileType:
+          type: string
+          enum:
+            - NOTIFICATION_PROFILE_UNKNOWN
+            - NOTIFICATION_PROFILE_CUSTOMER
+            - NOTIFICATION_PROFILE_END_CUSTOMER
+            - NOTIFICATION_PROFILE_HUGOHUB_PLATFORM
+            - UNRECOGNIZED
+        service:
+          type: string
+          enum:
+            - CUSTOMER
+            - DUMMYSERVICE
+            - BANKING_SERVICE
+            - CARD_SERVICE
+            - COMPLIANCE_SERVICE
+            - INVESTMENT_SERVICE
+            - UNRECOGNIZED
+        source:
+          type: string
+          enum:
+            - CUSTOMER
+            - DUMMYSERVICE
+            - BANKING_SERVICE
+            - CARD_SERVICE
+            - COMPLIANCE_SERVICE
+            - INVESTMENT_SERVICE
+            - UNRECOGNIZED
+        destination:
+          type: string
+          enum:
+            - CUSTOMER
+            - DUMMYSERVICE
+            - BANKING_SERVICE
+            - CARD_SERVICE
+            - COMPLIANCE_SERVICE
+            - INVESTMENT_SERVICE
+            - UNRECOGNIZED
+        customerProfileId:
+          type: string
+        status:
+          type: string
+          enum:
+            - PENDING
+            - RETRY
+            - SENT
+            - FETCHED
+            - EXCEPTION
+            - CONFIGURATION_NOT_FOUND
+            - MAX_ATTEMPTS_BREACHED
+            - FAILED
+            - UNRECOGNIZED
+        data:
+          $ref: '#/components/schemas/NotificationDataDTO'
+        serviceTs:
+          $ref: '#/components/schemas/Timestamp'
+        attemptsRemaining:
+          type: integer
+          format: int32
+        pushNow:
+          type: boolean
+      x-stoplight:
+        id: u321p6y1iieja
+    TestNotificationDTO:
+      type: object
+      properties:
+        text:
+          type: string
+      x-stoplight:
+        id: o6b560xi95y3x
+    Timestamp:
+      type: object
+      properties:
+        seconds:
+          type: integer
+          format: int64
+        nanos:
+          type: integer
+          format: int32
+      x-stoplight:
+        id: i6tuh7s94nyki
+    CreateUpdateCustomerFloatingMinimumBalanceDTO:
+      type: object
+      properties:
+        customerProfileId:
+          type: string
+        serviceName:
+          type: string
+          enum:
+            - CUSTOMER
+            - DUMMYSERVICE
+            - BANKING_SERVICE
+            - CARD_SERVICE
+            - COMPLIANCE_SERVICE
+            - INVESTMENT_SERVICE
+            - UNRECOGNIZED
+        floatLimit:
+          type: number
+          format: double
+      x-stoplight:
+        id: phyo2z40ati6f
+info:
+  description: Account Server URL
+  title: Accounts API
+  version: 1.0.0
